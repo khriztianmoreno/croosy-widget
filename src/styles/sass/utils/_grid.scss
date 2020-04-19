@@ -1,0 +1,258 @@
+@import './variables';
+@import './mixins';
+
+.container-left,
+.container-right,
+.container-fluid,
+.container {
+  box-sizing: border-box;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+}
+
+.container-left {
+  margin-left: 0;
+}
+
+.container-right {
+  margin-right: 0;
+}
+
+.row {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.row.reverse {
+  flex-direction: row-reverse;
+}
+
+.col.reverse {
+  flex-direction: column-reverse;
+}
+
+@each $breakpoint-key, $breakpoint-value in $breakpoints {
+  @include do-breakpoint($breakpoint-key) {
+    @if map-has-key($container, $breakpoint-key) {
+      $width: map-get($container, $breakpoint-key);
+
+      .container {
+        max-width: $width;
+      }
+
+      .container-left {
+        max-width: calc(#{$width} + (100% - #{$width}) / 2);
+      }
+
+      .container-right {
+        max-width: calc(#{$width} + (100% - #{$width}) / 2);
+      }
+    }
+
+    .container-left,
+    .container-right,
+    .container-fluid,
+    .container {
+      padding-right: map-get($gutters, $breakpoint-key);
+      padding-left: map-get($gutters, $breakpoint-key);
+      padding-top: map-get($gutters, $breakpoint-key);
+      padding-bottom: map-get($gutters, $breakpoint-key);
+
+      @include print {
+        padding: 0px;
+      }
+    }
+
+    .row {
+      margin-right: -#{map-get($gutters, $breakpoint-key)};
+      margin-left: -#{map-get($gutters, $breakpoint-key)};
+    }
+
+    .col,
+    .col-#{$breakpoint-key},
+    .col-#{$breakpoint-key}-static,
+    .col-#{$breakpoint-key}-1,
+    .col-#{$breakpoint-key}-2,
+    .col-#{$breakpoint-key}-3,
+    .col-#{$breakpoint-key}-4,
+    .col-#{$breakpoint-key}-5,
+    .col-#{$breakpoint-key}-6,
+    .col-#{$breakpoint-key}-7,
+    .col-#{$breakpoint-key}-8,
+    .col-#{$breakpoint-key}-9,
+    .col-#{$breakpoint-key}-10,
+    .col-#{$breakpoint-key}-11,
+    .col-#{$breakpoint-key}-12,
+    .col-#{$breakpoint-key}-offset-0,
+    .col-#{$breakpoint-key}-offset-1,
+    .col-#{$breakpoint-key}-offset-2,
+    .col-#{$breakpoint-key}-offset-3,
+    .col-#{$breakpoint-key}-offset-4,
+    .col-#{$breakpoint-key}-offset-5,
+    .col-#{$breakpoint-key}-offset-6,
+    .col-#{$breakpoint-key}-offset-7,
+    .col-#{$breakpoint-key}-offset-8,
+    .col-#{$breakpoint-key}-offset-9,
+    .col-#{$breakpoint-key}-offset-10,
+    .col-#{$breakpoint-key}-offset-11,
+    .col-#{$breakpoint-key}-offset-12 {
+      box-sizing: border-box;
+      flex: 0 0 auto;
+      @each $inner-key, $inner-value in $breakpoints {
+        @include do-breakpoint($inner-key) {
+          padding-right: map-get($gutters, $inner-key);
+          padding-left: map-get($gutters, $inner-key);
+        }
+      }
+    }
+
+    .col-#{$breakpoint-key} {
+      flex-grow: 1;
+      flex-basis: 0;
+      max-width: 100%;
+    }
+
+    .col-#{$breakpoint-key}-1 {
+      @include col(1);
+    }
+
+    .col-#{$breakpoint-key}-2 {
+      @include col(2);
+    }
+
+    .col-#{$breakpoint-key}-3 {
+      @include col(3);
+    }
+
+    .col-#{$breakpoint-key}-4 {
+      @include col(4);
+    }
+
+    .col-#{$breakpoint-key}-5 {
+      @include col(5);
+    }
+
+    .col-#{$breakpoint-key}-6 {
+      @include col(6);
+    }
+
+    .col-#{$breakpoint-key}-7 {
+      @include col(7);
+    }
+
+    .col-#{$breakpoint-key}-8 {
+      @include col(8);
+    }
+
+    .col-#{$breakpoint-key}-9 {
+      @include col(9);
+    }
+
+    .col-#{$breakpoint-key}-10 {
+      @include col(10);
+    }
+
+    .col-#{$breakpoint-key}-11 {
+      @include col(11);
+    }
+
+    .col-#{$breakpoint-key}-12 {
+      @include col(12);
+    }
+
+    .col-#{$breakpoint-key}-offset-0 {
+      @include offset(0);
+    }
+
+    .col-#{$breakpoint-key}-offset-1 {
+      @include offset(1);
+    }
+
+    .col-#{$breakpoint-key}-offset-2 {
+      @include offset(2);
+    }
+
+    .col-#{$breakpoint-key}-offset-3 {
+      @include offset(3);
+    }
+
+    .col-#{$breakpoint-key}-offset-4 {
+      @include offset(4);
+    }
+
+    .col-#{$breakpoint-key}-offset-5 {
+      @include offset(5);
+    }
+
+    .col-#{$breakpoint-key}-offset-6 {
+      @include offset(6);
+    }
+
+    .col-#{$breakpoint-key}-offset-7 {
+      @include offset(7);
+    }
+
+    .col-#{$breakpoint-key}-offset-8 {
+      @include offset(8);
+    }
+
+    .col-#{$breakpoint-key}-offset-9 {
+      @include offset(9);
+    }
+
+    .col-#{$breakpoint-key}-offset-10 {
+      @include offset(10);
+    }
+
+    .col-#{$breakpoint-key}-offset-11 {
+      @include offset(11);
+    }
+
+    .start-#{$breakpoint-key} {
+      justify-content: flex-start;
+      text-align: start;
+    }
+
+    .center-#{$breakpoint-key} {
+      justify-content: center;
+      text-align: center;
+    }
+
+    .end-#{$breakpoint-key} {
+      justify-content: flex-end;
+      text-align: end;
+    }
+
+    .top-#{$breakpoint-key} {
+      align-items: flex-start;
+    }
+
+    .middle-#{$breakpoint-key} {
+      align-items: center;
+    }
+
+    .bottom-#{$breakpoint-key} {
+      align-items: flex-end;
+    }
+
+    .around-#{$breakpoint-key} {
+      justify-content: space-around;
+    }
+
+    .between-#{$breakpoint-key} {
+      justify-content: space-between;
+    }
+
+    .first-#{$breakpoint-key} {
+      order: -1;
+    }
+
+    .last-#{$breakpoint-key} {
+      order: 1;
+    }
+  }
+}

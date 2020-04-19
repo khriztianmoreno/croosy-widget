@@ -1,0 +1,20 @@
+// GRID SYSTEM VARIABLES
+$breakpoints: (
+  xs: 0,
+  sm: 540px,
+  md: 768px,
+  lg: 1280px,
+);
+
+$container: (
+  sm: 90%,
+  md: 720px,
+  lg: 1080px,
+);
+
+$gutters: (
+  xs: 10px,
+  sm: 10px,
+  md: 10px,
+  lg: 10px,
+);

@@ -1,0 +1,39 @@
+@import './variables';
+
+@mixin col($colspan: 1) {
+  flex-basis: (100% * $colspan) / 12;
+  max-width: (100% * $colspan) / 12;
+}
+
+@mixin offset($cols: 0) {
+  margin-left: (100% * $cols) / 12;
+}
+
+@mixin do-breakpoint($key) {
+  @if map-get($breakpoints, $key) > 0 {
+    @media only screen and (min-width: map-get($breakpoints, $key)) {
+      @content;
+    }
+  }
+  @if map-get($breakpoints, $key) == 0 {
+    @content;
+  }
+}
+
+@mixin make-responsive($property, $lower, $upper) {
+  $bounds-difference: ($upper - $lower) / 3;
+  $counter: 0;
+
+  @each $breakpoint-key, $breakpoint-value in $breakpoints {
+    @include do-breakpoint($breakpoint-key) {
+      #{$property}: round($lower + ($bounds-difference * $counter));
+      $counter: $counter + 1;
+    }
+  }
+}
+
+@mixin print {
+  @media print {
+    @content;
+  }
+}
