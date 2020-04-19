@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
+import styled from '@emotion/styled'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const getData = async (appId, setState) => {
+  const BASE = process.env.REACT_APP_API_SERVICE_URL
+  try {
+    const response = await fetch(`${BASE}/Widgets/${appId}`)
+    // const response = await fetch('https://jsonplaceholder.typicode.com/users')
+    const data = await response.json()
+
+    setState(data)
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error)
+  }
 }
 
-export default App;
+const Title = styled.h1`
+  font-size: 35px;
+  color: blue;
+  text-transform: uppercase;
+`
+
+function App(props) {
+  const [data, setData] = useState({})
+
+  useEffect(() => {
+    const { applicationId } = props
+    getData(applicationId, setData)
+  }, [])
+
+  return (
+    <div className="App">
+      <Title>Hello People</Title>
+      <pre>{JSON.stringify(data, null, 2) }</pre>
+    </div>
+  )
+}
+
+App.propTypes = {
+  applicationId: PropTypes.string.isRequired,
+}
+
+export default App
