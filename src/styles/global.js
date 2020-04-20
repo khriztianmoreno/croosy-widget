@@ -4,6 +4,7 @@ import { typographyStyle, media } from './utils'
 
 export default (theme) => css`
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;600;700;800&display=swap');
 
   a,
   *::before,
@@ -53,4 +54,13 @@ export default (theme) => css`
   em, b, strong {
     font-weight: 700;
   }
+
+  /* .slick-list {
+    .slick-track {
+      .slick-slide {
+        width: 144px !important;
+      }
+    }
+  } */
+
 `

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import styled from '@emotion/styled'
+
+import Schedule from './components/schedule'
 
 const getData = async (appId, setState) => {
   const BASE = process.env.REACT_APP_API_SERVICE_URL
@@ -16,12 +17,6 @@ const getData = async (appId, setState) => {
   }
 }
 
-const Title = styled.h1`
-  font-size: 35px;
-  color: blue;
-  text-transform: uppercase;
-`
-
 function App(props) {
   const [data, setData] = useState({})
 
@@ -31,9 +26,8 @@ function App(props) {
   }, [])
 
   return (
-    <div className="App">
-      <Title>Hello People</Title>
-      <pre>{JSON.stringify(data, null, 2) }</pre>
+    <div className="container">
+      <Schedule startDate={data.startDate} endDate={data.endDate} />
     </div>
   )
 }
