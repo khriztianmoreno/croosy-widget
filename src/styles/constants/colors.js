@@ -5,7 +5,7 @@
  */
 
 const alabaster = '#fafafa'
-const alto = '#d9d9d9'
+const alto = '#D6D6D6'
 const aquaSqueeze = '#E3F1EE'
 const black = '#000000'
 const black006 = 'rgba(0, 0, 0, 0.06)'
@@ -38,6 +38,7 @@ const lightningYellow = '#FFBF24'
 const lima = '#7ed321'
 const malibu = '#74a7ff'
 const mercury = '#EAEAEA'
+const midnight = '#0f1f40'
 const mineShaft = '#222222'
 const oracle = '#31736f'
 const oceanGreen = '#3DA57A'
@@ -48,7 +49,7 @@ const red = '#f5222d'
 const salmon = '#ff7875'
 const salomie = '#ffe58f'
 const foam = '#e8fdf8'
-const shamrock = '#38c7a0'
+const shamrock = '#29CA7E'
 const silverChalice = '#a1a1a1'
 const vermilion = '#FF4106'
 const white = '#FFFFFF'
@@ -91,6 +92,7 @@ export default {
   lima,
   malibu,
   mercury,
+  midnight,
   mineShaft,
   opBlue: persianBlue,
   oceanGreen,
