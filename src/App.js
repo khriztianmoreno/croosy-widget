@@ -17,17 +17,24 @@ const getData = async (appId, setState) => {
   }
 }
 
-function App(props) {
+function App({ applicationId }) {
   const [data, setData] = useState({})
 
   useEffect(() => {
-    const { applicationId } = props
     getData(applicationId, setData)
   }, [])
 
   return (
     <div className="container">
-      <Schedule startDate={data.startDate} endDate={data.endDate} />
+      <div className="row">
+        <div className="col-xs-12">
+          <Schedule
+            appId={applicationId}
+            startDate={data.startDate}
+            endDate={data.endDate}
+          />
+        </div>
+      </div>
     </div>
   )
 }
