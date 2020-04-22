@@ -40,6 +40,7 @@ const malibu = '#74a7ff'
 const mercury = '#EAEAEA'
 const midnight = '#0f1f40'
 const mineShaft = '#222222'
+const monson = '#8E8D8E'
 const oracle = '#31736f'
 const oceanGreen = '#3DA57A'
 const persianBlue = '#2626D6'
@@ -94,6 +95,7 @@ export default {
   mercury,
   midnight,
   mineShaft,
+  monson,
   opBlue: persianBlue,
   oceanGreen,
   opDarkGray: mineShaft,

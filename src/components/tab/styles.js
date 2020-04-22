@@ -33,8 +33,8 @@ export const Label = styled.p`
 `
 
 export const LabelDate = styled.p(
-  (props) => css`
-    color: ${props.active ? props.theme.colors.white : '#8e8d8e'};
+  ({ theme, active }) => css`
+    color: ${active ? theme.colors.white : theme.colors.monson};
     font-size: 13px;
     text-transform: capitalize;
   `,
