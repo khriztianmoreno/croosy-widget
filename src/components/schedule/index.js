@@ -61,7 +61,7 @@ const Schedule = (props) => {
   const { startDate, endDate } = props
   const getActivitiesByDay = async (day, setData, appId) => {
     try {
-      const response = await fetch(`${BASE}/Widgets/${appId}/activities/?date=${day}`)
+      const response = await fetch(`${BASE}/Widgets/applications/${appId}/activities/?date=${day}`)
       const data = await response.json()
       setData(data)
     } catch (error) {

@@ -6,8 +6,7 @@ import Schedule from './components/schedule'
 const getData = async (appId, setState) => {
   const BASE = process.env.REACT_APP_API_SERVICE_URL
   try {
-    const response = await fetch(`${BASE}/Widgets/${appId}`)
-    // const response = await fetch('https://jsonplaceholder.typicode.com/users')
+    const response = await fetch(`${BASE}/Widgets/applications/${appId}`)
     const data = await response.json()
 
     setState(data)
