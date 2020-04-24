@@ -7,16 +7,17 @@ export const TabButton = styled.button(
     display: 'inherit',
     padding: '5px 15px',
   },
-  (props) => css`
-    border: 1px solid ${props.theme.colors.alto};
+  ({ theme, colors, active }) => css`
+    border: 1px solid ${theme.colors.alto};
     min-width: 174px;
 
-    ${props.active ? css`
-      color: ${props.theme.colors.shamrock};
-      background-color: ${props.theme.colors.midnight};
-      border-color: ${props.theme.colors.midnight};
+    ${active ? css`
+      color: ${colors.activateFontColor || theme.colors.shamrock};
+      background-color: ${colors.bgColor || theme.colors.midnight};
+      border-color: ${colors.bgColor || theme.colors.midnight};
     ` : css`
-      color: ${props.theme.colors.midnight};
+      color: ${colors.fontColor || theme.colors.midnight};
+      background-color: ${theme.colors.white};
     `}
   `,
 )
