@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import Moment from 'moment'
 import get from 'lodash/get'
 import { extendMoment } from 'moment-range'
@@ -10,13 +9,14 @@ import 'moment/locale/es'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
+import { useAppState, getActivities, useAppDispatch } from '../context/context'
+import Info from '../InfoEvent'
 import Tab from '../tab'
 import Activity from '../activity'
 import ActivityLoader from '../ActivityLoader'
 
 import ContaienrNavbar from './styles'
 
-const BASE = process.env.REACT_APP_API_SERVICE_URL
 const moment = extendMoment(Moment)
 Moment.locale('es')
 
@@ -27,6 +27,13 @@ const settings = {
   slidesToShow: 6,
   speed: 500,
   responsive: [
+    {
+      breakpoint: 1280,
+      settings: {
+        slidesToScroll: 2,
+        slidesToShow: 4,
+      },
+    },
     {
       breakpoint: 1024,
       settings: {
@@ -52,18 +59,19 @@ const settings = {
   ],
 }
 
-const Schedule = (props) => {
+const Schedule = () => {
+  const {
+    application: { id: appId, startDate, endDate },
+    activities,
+  } = useAppState()
+  const dispatch = useAppDispatch()
   const [isLoading, setLoading] = useState(true)
   const [currentTab, setCurrentTab] = useState(null)
-  const [activities, setActivities] = useState([])
   const [rangeDays, setRangeDays] = useState([])
 
-  const { startDate, endDate } = props
-  const getActivitiesByDay = async (day, setData, appId) => {
+  const getActivitiesByDay = async (day) => {
     try {
-      const response = await fetch(`${BASE}/Widgets/applications/${appId}/activities/?date=${day}`)
-      const data = await response.json()
-      setData(data)
+      getActivities(dispatch, appId, day)
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error)
@@ -81,9 +89,8 @@ const Schedule = (props) => {
     // get the first day
     const firstDay = get(acc, '[0]', null)
     if (firstDay) {
-      const { appId } = props
       const day = firstDay.format('YYYY-MM-DD')
-      getActivitiesByDay(day, setActivities, appId)
+      getActivitiesByDay(day, appId)
     }
 
     setRangeDays(acc)
@@ -92,14 +99,14 @@ const Schedule = (props) => {
   useEffect(() => {
     if (currentTab) {
       setLoading(true)
-      const { appId } = props
       const day = currentTab.format('YYYY-MM-DD')
-      getActivitiesByDay(day, setActivities, appId)
+      getActivitiesByDay(day, appId)
     }
   }, [currentTab])
 
   return (
     <>
+      <Info />
       <ContaienrNavbar>
         <Slider {...settings}>
           {
@@ -135,17 +142,6 @@ const Schedule = (props) => {
       </div>
     </>
   )
-}
-
-Schedule.propTypes = {
-  appId: PropTypes.string.isRequired,
-  startDate: PropTypes.string,
-  endDate: PropTypes.string,
-}
-
-Schedule.defaultProps = {
-  startDate: '',
-  endDate: '',
 }
 
 export default React.memo(Schedule)

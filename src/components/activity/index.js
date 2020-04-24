@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
+import { useAppState } from '../context/context'
 import {
   Body,
   Category,
@@ -17,6 +18,9 @@ import {
 const Activity = (props) => {
   const [isDetailOpen, setShowDetail] = useState(false)
   const {
+    application: { fontColor },
+  } = useAppState()
+  const {
     category,
     description,
     location,
@@ -29,12 +33,14 @@ const Activity = (props) => {
     <Container className="col-xs-12" onClick={() => { setShowDetail(!isDetailOpen) }}>
       <Header className="row">
         <TimeContainer className="col col-xs-12">
-          <Time>
+          <Time fontColor={fontColor}>
             {start.format('LT')}
           </Time>
         </TimeContainer>
         <div className="col-xs-12 col-md">
-          <Title>{name}</Title>
+          <Title fontColor={fontColor}>
+            {name}
+          </Title>
           <div className="speaker-info">
             <Location>{location}</Location>
             <Category color={category.color}>

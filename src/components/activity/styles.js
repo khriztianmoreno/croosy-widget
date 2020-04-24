@@ -14,13 +14,15 @@ export const Container = styled.div(
   `,
 )
 
-export const Header = styled.div`
-  background: #fff;
-  border-radius: 0;
-  border: none;
-  display: flex;
-  padding: 20px 35px;
-`
+export const Header = styled.div(
+  ({ theme }) => css`
+    background: ${theme.colors.white};
+    border-radius: 0;
+    border: none;
+    display: flex;
+    padding: 20px 35px;
+  `,
+)
 
 export const TimeContainer = styled.div`
   display: flex;
@@ -28,17 +30,17 @@ export const TimeContainer = styled.div`
 `
 
 export const Time = styled.h4(
-  (props) => css`
+  ({ theme, fontColor }) => css`
     font-weight: 700;
     font-family: 'Poppins', sans-serif;
-    color: ${props.theme.colors.midnight};
+    color: ${fontColor || theme.colors.midnight};
     line-height: 1.3;
   `,
 )
 
 export const Title = styled.h5(
-  (props) => css`
-    color: ${props.theme.colors.midnight};
+  ({ theme, fontColor }) => css`
+    color: ${fontColor || theme.colors.midnight};
     font-size:  22px;
     line-height: 1.3;
 

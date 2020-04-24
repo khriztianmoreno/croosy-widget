@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { Global } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 
+import { AppProvider } from './components/context/context'
 import App from './App'
 
 import theme from './styles/theme'
@@ -16,7 +17,9 @@ const applicationId = el.getAttribute('data-croosy-applicationId')
 const Widget = () => (
   <ThemeProvider theme={theme}>
     <Global styles={globalStyles} />
-    <App applicationId={applicationId} />
+    <AppProvider>
+      <App applicationId={applicationId} />
+    </AppProvider>
   </ThemeProvider>
 )
 

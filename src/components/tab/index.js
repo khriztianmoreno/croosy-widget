@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { useAppState } from '../context/context'
 import {
   TabButton,
   EventDay,
@@ -13,6 +14,14 @@ import {
 
 const Tab = (props) => {
   const {
+    application: {
+      alternateBackgroundColor,
+      fontColor,
+      alternateFontColor,
+      secondaryFontColor,
+    },
+  } = useAppState()
+  const {
     day,
     date,
     isActive,
@@ -21,7 +30,17 @@ const Tab = (props) => {
   const eventDate = `${date.format('dddd')} ${date.format('DD')}`
 
   return (
-    <TabButton role="tab" active={isActive} onClick={() => cbClick(date)}>
+    <TabButton
+      role="tab"
+      active={isActive}
+      onClick={() => cbClick(date)}
+      colors={{
+        bgColor: alternateBackgroundColor,
+        fontColor,
+        activateFontColor: secondaryFontColor,
+        alternateFontColor,
+      }}
+    >
       <EventDay>
         <EventDetailNumber>
           <LabelNumber>{day}</LabelNumber>
