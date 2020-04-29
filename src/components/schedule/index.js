@@ -9,7 +9,8 @@ import 'moment/locale/es'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
-import { useAppState, getActivities, useAppDispatch } from '../context/context'
+import { useAppState, useAppDispatch } from '../context'
+import { getActivities } from '../context/service'
 import Info from '../InfoEvent'
 import Tab from '../tab'
 import Activity from '../activity'
@@ -60,22 +61,25 @@ const settings = {
 
 const Schedule = () => {
   const {
-    application: { id: appId, startDate, endDate },
+    application: {
+      id: appId,
+      startDate,
+      endDate,
+      withDataDraft,
+    },
     activities,
+    isLoading,
   } = useAppState()
   const dispatch = useAppDispatch()
-  const [isLoading, setLoading] = useState(true)
   const [currentTab, setCurrentTab] = useState(null)
   const [rangeDays, setRangeDays] = useState([])
 
   const getActivitiesByDay = async (day) => {
     try {
-      getActivities(dispatch, appId, day)
+      getActivities(dispatch, { appId, day, withDataDraft })
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error)
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -97,7 +101,6 @@ const Schedule = () => {
 
   useEffect(() => {
     if (currentTab) {
-      setLoading(true)
       const day = currentTab.format('YYYY-MM-DD')
       getActivitiesByDay(day, appId)
     }

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { css } from '@emotion/core'
+import { css, keyframes } from '@emotion/core'
 
 import { media } from '../../styles/utils'
 
@@ -68,56 +68,47 @@ export const Category = styled.p(
   `,
 )
 
-// const fadeInDown = keyframes`
-//   from {
-//     opacity: 0;
-//     transform: translate3d(0, -100%, 0);
-//   }
-
-//   to {
-//     opacity: 1;
-//     transform: translate3d(0, 0, 0);
-//   }
-// `
-// const fadeInUp = keyframes`
-//   from {
-//     opacity: 1;
-//     transform: translate3d(0, 0, 0);
-//   }
-
-//   to {
-//     opacity: 0;
-//     transform: translate3d(0, 100%, 0);
-//   }
-// `
-
-export const Body = styled.div`
-  /* overflow:hidden;
-  transition:transform 0.3s ease-out;
-  height:auto;
-  transform:scaleY(1);
-  transform-origin:top; */
-  display: block;
-
-  &.collapsed {
-    display: none;
+const fadeInDown = keyframes`
+  0% {
+    height: 0;
   }
 
-  /* transition-property: all;
-  transition-duration: .5s;
-  transition-timing-function: cubic-bezier(0, 1, 0.5, 1); */
+  25% {
+    height: 25%;
+  }
+
+  50% {
+    height: 50%;
+  }
+
+  75% {
+    height: 75%;
+  }
+
+  100% {
+    height: 100%;
+  }
 `
+
+export const Body = styled.div``
 
 export const Description = styled.div(
   {
+    fontSize: '16px',
+    height: 0,
     overflow: 'hidden',
-    padding: '0 35px 20px',
+    padding: 0,
   },
-  ({ theme }) => css`
+  ({ theme, isDetailOpen }) => css`
     background: ${theme.colors.white};
     font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    overflow: hidden;
-    padding: 0 35px 20px;
+
+    ${isDetailOpen ? css`
+      padding-left: 35px;
+      padding-right: 35px;
+      padding-bottom: 20px;
+      animation: ${fadeInDown} 1s ease infinite;
+      transition: padding-bottom 0.5s ease-out;
+    ` : ''}
   `,
 )

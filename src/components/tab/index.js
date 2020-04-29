@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { useAppState } from '../context/context'
+import { useAppState } from '../context'
 import {
   TabButton,
   EventDay,

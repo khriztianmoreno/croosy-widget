@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import styled from '@emotion/styled'
 
-import { useAppState } from '../context/context'
+import { useAppState } from '../context'
 
 import { media } from '../../styles/utils'
 
