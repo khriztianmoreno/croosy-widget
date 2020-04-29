@@ -2,17 +2,15 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  useAppDispatch,
-  getApplication,
-} from './components/context/context'
+import { useAppDispatch } from './components/context'
+import { getApplication } from './components/context/service'
 import Schedule from './components/schedule'
 
-function App({ applicationId }) {
+function App({ applicationId, withDataDraft }) {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    getApplication(dispatch, applicationId)
+    getApplication(dispatch, { applicationId, withDataDraft })
   }, [])
 
   return (
@@ -28,6 +26,11 @@ function App({ applicationId }) {
 
 App.propTypes = {
   applicationId: PropTypes.string.isRequired,
+  withDataDraft: PropTypes.bool,
+}
+
+App.defaultProps = {
+  withDataDraft: false,
 }
 
 export default App

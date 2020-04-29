@@ -1,13 +1,12 @@
 import React from 'react'
 
-import service from './service'
-
 const AppStateContext = React.createContext()
 const AppDispatchContext = React.createContext()
 
 const initialState = {
   application: {},
   activities: [],
+  isLoading: true,
 }
 
 function AppReducer(state, action) {
@@ -22,6 +21,12 @@ function AppReducer(state, action) {
       return {
         ...state,
         activities: action.payload,
+      }
+    }
+    case 'SET_LOADING': {
+      return {
+        ...state,
+        isLoading: action.payload,
       }
     }
     default: {
@@ -58,28 +63,8 @@ function useAppDispatch() {
   return context
 }
 
-async function getApplication(dispatch, appId) {
-  try {
-    const data = await service.applicationData(appId)
-    dispatch({ type: 'SET_DATA', payload: data })
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-async function getActivities(dispatch, appId, day) {
-  try {
-    const activities = await service.activitiesData(appId, day)
-    dispatch({ type: 'SET_ACTIVITIES', payload: activities })
-  } catch (error) {
-    console.error(error)
-  }
-}
-
 export {
   AppProvider,
   useAppState,
   useAppDispatch,
-  getApplication,
-  getActivities,
 }

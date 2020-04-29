@@ -13,33 +13,31 @@ async function fetchData(endpoint) {
   }
 }
 
-async function applicationData(appId) {
+export async function getApplication(dispatch, payload) {
+  const { applicationId: appId, withDataDraft } = payload
+  dispatch({ type: 'SET_LOADING', payload: true })
   try {
     const data = await fetchData(`${BASE}/Widgets/applications/${appId}`)
-
-    return data
+    dispatch({ type: 'SET_DATA', payload: { ...data, withDataDraft } })
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error)
-    return null
+  } finally {
+    dispatch({ type: 'SET_LOADING', payload: false })
   }
 }
 
-async function activitiesData(appId, day) {
+export async function getActivities(dispatch, payload) {
+  const { appId, day, withDataDraft } = payload
+  const endPoint = `${BASE}/Widgets/applications/${appId}/activities/${withDataDraft ? 'draft' : ''}?date=${day}`
+  dispatch({ type: 'SET_LOADING', payload: true })
   try {
-    const data = await fetchData(`${BASE}/Widgets/applications/${appId}/activities/?date=${day}`)
-
-    return data
+    const activities = await fetchData(endPoint)
+    dispatch({ type: 'SET_ACTIVITIES', payload: activities })
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error)
-    return null
+  } finally {
+    dispatch({ type: 'SET_LOADING', payload: false })
   }
 }
-
-const services = {
-  applicationData,
-  activitiesData,
-}
-
-export default services

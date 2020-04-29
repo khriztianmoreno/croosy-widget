@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import { useAppState } from '../context/context'
+import { useAppState } from '../context'
 import {
   Body,
   Category,
@@ -49,14 +49,18 @@ const Activity = (props) => {
           </div>
         </div>
       </Header>
-      {
-        description
-          ? (
-            <Body className={isDetailOpen ? '' : 'collapsed'}>
-              <Description dangerouslySetInnerHTML={{ __html: description }} />
-            </Body>
-          ) : null
-      }
+      <Body className={isDetailOpen ? '' : 'collapsed'}>
+        {
+          description
+            ? (
+              <Description
+                isDetailOpen={isDetailOpen}
+                dangerouslySetInnerHTML={{ __html: description }}
+              />
+            )
+            : <Description isDetailOpen={isDetailOpen}>Sin descripción</Description>
+        }
+      </Body>
     </Container>
   )
 }
