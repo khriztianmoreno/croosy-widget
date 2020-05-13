@@ -61,12 +61,19 @@ export const Location = styled.p(
 
 export const Category = styled.p(
   {
+    alignItems: 'center',
+    display: 'flex',
     fontSize: '14px',
   },
   (props) => css`
     color: ${props.color || 'unset'};
   `,
 )
+
+export const CategoryImage = styled.img`
+  margin-right: 10px;
+  width: 20px;
+`
 
 const fadeInDown = keyframes`
   0% {
@@ -93,6 +100,27 @@ const fadeInDown = keyframes`
 export const Body = styled.div``
 
 export const Description = styled.div(
+  {
+    fontSize: '16px',
+    height: 0,
+    overflow: 'hidden',
+    padding: 0,
+  },
+  ({ theme, isDetailOpen }) => css`
+    background: ${theme.colors.white};
+    font-family: 'Poppins', sans-serif;
+
+    ${isDetailOpen ? css`
+      padding-left: 35px;
+      padding-right: 35px;
+      padding-bottom: 20px;
+      animation: ${fadeInDown} 1s ease infinite;
+      transition: padding-bottom 0.5s ease-out;
+    ` : ''}
+  `,
+)
+
+export const ContentLink = styled.div(
   {
     fontSize: '16px',
     height: 0,
