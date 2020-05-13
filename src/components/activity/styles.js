@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { css, keyframes } from '@emotion/core'
+import { css } from '@emotion/core'
 
 import { media } from '../../styles/utils'
 
@@ -9,7 +9,6 @@ export const Container = styled.div(
     border-radius: 8px;
     border: none;
     box-shadow: 0px 5px 15px 0px rgba(173, 171, 171, 0.4);
-    cursor: pointer;
     margin-bottom: 1.5rem;
   `,
 )
@@ -75,68 +74,32 @@ export const CategoryImage = styled.img`
   width: 20px;
 `
 
-const fadeInDown = keyframes`
-  0% {
-    height: 0;
-  }
-
-  25% {
-    height: 25%;
-  }
-
-  50% {
-    height: 50%;
-  }
-
-  75% {
-    height: 75%;
-  }
-
-  100% {
-    height: 100%;
-  }
-`
-
 export const Body = styled.div``
 
 export const Description = styled.div(
   {
     fontSize: '16px',
-    height: 0,
     overflow: 'hidden',
-    padding: 0,
   },
-  ({ theme, isDetailOpen }) => css`
+  ({ theme }) => css`
     background: ${theme.colors.white};
     font-family: 'Poppins', sans-serif;
-
-    ${isDetailOpen ? css`
-      padding-left: 35px;
-      padding-right: 35px;
-      padding-bottom: 20px;
-      animation: ${fadeInDown} 1s ease infinite;
-      transition: padding-bottom 0.5s ease-out;
-    ` : ''}
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-bottom: 20px;
   `,
 )
 
 export const ContentLink = styled.div(
   {
     fontSize: '16px',
-    height: 0,
     overflow: 'hidden',
-    padding: 0,
   },
-  ({ theme, isDetailOpen }) => css`
+  ({ theme }) => css`
     background: ${theme.colors.white};
     font-family: 'Poppins', sans-serif;
-
-    ${isDetailOpen ? css`
-      padding-left: 35px;
-      padding-right: 35px;
-      padding-bottom: 20px;
-      animation: ${fadeInDown} 1s ease infinite;
-      transition: padding-bottom 0.5s ease-out;
-    ` : ''}
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-bottom: 20px;
   `,
 )
