@@ -6,7 +6,9 @@ import { useAppState } from '../context'
 import {
   Body,
   Category,
+  CategoryImage,
   Container,
+  ContentLink,
   Description,
   Header,
   Location,
@@ -25,6 +27,7 @@ const Activity = (props) => {
     description,
     location,
     name,
+    url,
     responsible,
     date,
   } = props
@@ -44,6 +47,7 @@ const Activity = (props) => {
           <div className="speaker-info">
             <Location>{location}</Location>
             <Category color={category.color}>
+              <CategoryImage src={category.imageUrl} alt="category logo" />
               {responsible}
             </Category>
           </div>
@@ -53,10 +57,17 @@ const Activity = (props) => {
         {
           description
             ? (
-              <Description
-                isDetailOpen={isDetailOpen}
-                dangerouslySetInnerHTML={{ __html: description }}
-              />
+              <>
+                <Description
+                  isDetailOpen={isDetailOpen}
+                  dangerouslySetInnerHTML={{ __html: description }}
+                />
+                <ContentLink isDetailOpen={isDetailOpen}>
+                  <a href={url} target="_blank" rel="noopener noreferrer">
+                    Acceso a la actividad
+                  </a>
+                </ContentLink>
+              </>
             )
             : <Description isDetailOpen={isDetailOpen}>Sin descripción</Description>
         }
@@ -67,11 +78,12 @@ const Activity = (props) => {
 
 Activity.propTypes = {
   category: PropTypes.shape(),
-  description: PropTypes.string,
   date: PropTypes.string,
+  description: PropTypes.string,
   location: PropTypes.string,
   name: PropTypes.string,
   responsible: PropTypes.string,
+  url: PropTypes.string,
 }
 
 Activity.defaultProps = {
@@ -81,6 +93,7 @@ Activity.defaultProps = {
   location: '',
   name: '',
   responsible: '',
+  url: '',
 }
 
 export default Activity
