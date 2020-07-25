@@ -3,11 +3,9 @@ import React, { useState, useEffect } from 'react'
 import Moment from 'moment'
 import get from 'lodash/get'
 import { extendMoment } from 'moment-range'
-import Slider from 'react-slick'
+import ScrollMenu from 'react-horizontal-scrolling-menu'
 
 import 'moment/locale/es'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
 
 import { useAppState, useAppDispatch } from '../context'
 import { getActivities } from '../context/service'
@@ -20,44 +18,6 @@ import ContaienrNavbar from './styles'
 
 const moment = extendMoment(Moment)
 Moment.locale('es')
-
-const settings = {
-  dots: false,
-  infinite: false,
-  slidesToScroll: 2,
-  slidesToShow: 6,
-  speed: 500,
-  responsive: [
-    {
-      breakpoint: 1280,
-      settings: {
-        slidesToScroll: 2,
-        slidesToShow: 4,
-      },
-    },
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToScroll: 2,
-        slidesToShow: 4,
-      },
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-      },
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-      },
-    },
-  ],
-}
 
 const Schedule = () => {
   const {
@@ -110,24 +70,25 @@ const Schedule = () => {
     <>
       <Info />
       <ContaienrNavbar>
-        <Slider {...settings}>
-          {
-            rangeDays.map((day, idx) => {
-              const isActive = !currentTab
-                ? idx === 0
-                : day.isSame(currentTab, 'day')
-              return (
-                <Tab
-                  key={idx}
-                  date={day}
-                  day={idx + 1}
-                  isActive={isActive}
-                  cbClick={setCurrentTab}
-                />
-              )
-            })
-          }
-        </Slider>
+        <ScrollMenu
+          data={rangeDays.map((day, idx) => {
+            const isActive = !currentTab
+              ? idx === 0
+              : day.isSame(currentTab, 'day')
+            return (
+              <Tab
+                key={idx}
+                date={day}
+                day={idx + 1}
+                isActive={isActive}
+                cbClick={setCurrentTab}
+              />
+            )
+          })}
+          selected={currentTab}
+          alignOnResize
+          alignCenter={false}
+        />
       </ContaienrNavbar>
       <div>
         {
