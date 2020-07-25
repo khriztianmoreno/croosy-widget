@@ -33,14 +33,14 @@ const Activity = (props) => {
   } = props
   const start = moment(date)
   return (
-    <Container className="col-xs-12" onClick={() => { setShowDetail(!isDetailOpen) }}>
-      <Header className="row">
-        <TimeContainer className="col col-xs-12">
+    <Container onClick={() => { setShowDetail(!isDetailOpen) }}>
+      <Header>
+        <TimeContainer>
           <Time fontColor={fontColor}>
             {start.format('LT')}
           </Time>
         </TimeContainer>
-        <div className="col-xs-12 col-md">
+        <div>
           <Title fontColor={fontColor}>
             {name}
           </Title>

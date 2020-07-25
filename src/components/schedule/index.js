@@ -94,7 +94,7 @@ const Schedule = () => {
         {
           isLoading
             ? (
-              <div className="col-xs-12">
+              <div>
                 <ActivityLoader />
                 <ActivityLoader />
                 <ActivityLoader />

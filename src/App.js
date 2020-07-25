@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 
@@ -13,15 +12,7 @@ function App({ applicationId, withDataDraft }) {
     getApplication(dispatch, { applicationId, withDataDraft })
   }, [])
 
-  return (
-    <div className="container">
-      <div className="row">
-        <div className="col-xs-12">
-          <Schedule />
-        </div>
-      </div>
-    </div>
-  )
+  return <Schedule />
 }
 
 App.propTypes = {
