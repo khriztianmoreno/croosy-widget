@@ -18,21 +18,19 @@ export const Header = styled.div(
     background: ${theme.colors.white};
     border-radius: 0;
     border: none;
-    display: flex;
     padding: 20px 35px;
   `,
 )
 
 export const TimeContainer = styled.div`
-  display: flex;
-  align-items: center;
 `
 
 export const Time = styled.h4(
   ({ theme, fontColor }) => css`
-    font-weight: 700;
-    font-family: 'Poppins', sans-serif;
     color: ${fontColor || theme.colors.midnight};
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
     line-height: 1.3;
   `,
 )
@@ -40,6 +38,7 @@ export const Time = styled.h4(
 export const Title = styled.h5(
   ({ theme, fontColor }) => css`
     color: ${fontColor || theme.colors.midnight};
+    display: block;
     font-size:  22px;
     line-height: 1.3;
 
